@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#0b1220">
+<title>HANEDA TAXI LIVE</title>
+<style>
+:root{color-scheme:dark;--bg:#0b1220;--panel:#131e30;--line:#26354b;--muted:#9eb0c8;--accent:#57d6a1}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:#f3f7fc;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+header{position:sticky;top:0;z-index:5;background:#0b1220ed;backdrop-filter:blur(12px);padding:14px 14px 12px;border-bottom:1px solid var(--line)}
+h1{font-size:20px;margin:0 0 8px;letter-spacing:.3px}.sub{font-size:12px;color:var(--muted)}
+.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:12px}.pill,button{border:1px solid var(--line);background:var(--panel);color:#f3f7fc;border-radius:10px;padding:9px 11px;font-size:13px}button{cursor:pointer}.status{color:var(--accent);font-size:12px;margin-left:auto}
+main{padding:12px;display:grid;grid-template-columns:1fr;gap:12px;max-width:1100px;margin:auto}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:hidden}.card-head{display:flex;justify-content:space-between;align-items:center;padding:11px 12px;gap:8px}.card h2{font-size:15px;margin:0}.card-head label{font-size:12px;color:var(--muted);white-space:nowrap}.view{height:250px;background:#080d15;position:relative}.view iframe{width:100%;height:100%;border:0;background:#080d15}.fallback{padding:18px;color:var(--muted);font-size:13px;line-height:1.6}.fallback a{color:#9bd6ff}.hidden{display:none!important}.card-foot{padding:9px 12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);display:flex;justify-content:space-between;gap:8px}.notice{max-width:1100px;margin:0 auto;padding:0 14px 18px;color:var(--muted);font-size:12px;line-height:1.65}a{color:#9bd6ff}
+@media(min-width:700px){main{grid-template-columns:repeat(2,minmax(0,1fr))}.view{height:300px}}
+@media(min-width:1050px){main{grid-template-columns:repeat(3,minmax(0,1fr))}.view{height:280px}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🚕 HANEDA TAXI LIVE</h1>
+  <div class="sub">羽田空港 タクシー乗り場・待機所ダッシュボード</div>
+  <div class="toolbar">
+    <span class="pill">自動更新：<strong id="intervalLabel">60秒</strong></span>
+    <button id="toggleRefresh" type="button">自動更新 ON</button>
+    <button id="refreshNow" type="button">↻ 今すぐ更新</button>
+    <button id="showAll" type="button">全カメラ表示</button>
+    <span class="status" id="lastUpdate">準備中…</span>
+  </div>
+</header>
+<main id="cameraGrid">
+  <article class="card" data-camera="wait1">
+    <div class="card-head"><h2>第1タクシー待機所</h2><label><input type="checkbox" checked> 表示</label></div>
+    <div class="view"><iframe title="第1タクシー待機所" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ttc.taxi-inf.jp/index.php"></iframe></div>
+    <div class="card-foot"><span>公式カメラページ</span><a href="https://ttc.taxi-inf.jp/index.php" target="_blank" rel="noopener">別画面で開く ↗</a></div>
+  </article>
+  <article class="card" data-camera="wait34">
+    <div class="card-head"><h2>第3・第4タクシー待機所</h2><label><input type="checkbox" checked> 表示</label></div>
+    <div class="view"><iframe title="第3・第4タクシー待機所" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ttc.taxi-inf.jp/no23.php"></iframe></div>
+    <div class="card-foot"><span>公式カメラページ</span><a href="https://ttc.taxi-inf.jp/no23.php" target="_blank" rel="noopener">別画面で開く ↗</a></div>
+  </article>
+  <article class="card" data-camera="stand4">
+    <div class="card-head"><h2>第4タクシー乗り場</h2><label><input type="checkbox" checked> 表示</label></div>
+    <div class="view"><iframe title="第4タクシー乗り場" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ttc.taxi-inf.jp/No4TaxiStand.php"></iframe></div>
+    <div class="card-foot"><span>公式カメラページ</span><a href="https://ttc.taxi-inf.jp/No4TaxiStand.php" target="_blank" rel="noopener">別画面で開く ↗</a></div>
+  </article>
+  <article class="card" data-camera="stand5">
+    <div class="card-head"><h2>第5乗場（T3）</h2><label><input type="checkbox" checked> 表示</label></div>
+    <div class="view"><iframe title="第5乗場（T3）" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" src="https://ttc.taxi-inf.jp/No5TaxiStand.php"></iframe></div>
+    <div class="card-foot"><span>公式カメラページ</span><a href="https://ttc.taxi-inf.jp/No5TaxiStand.php" target="_blank" rel="noopener">別画面で開く ↗</a></div>
+  </article>
+</main>
+<div class="notice">
+  <p>※ 公式ページを埋め込んで表示する試作版です。公式側の設定により、この画面内で表示できない場合があります。その場合は「別画面で開く」を利用してください。公式ページの画像更新は原則1分ごとですが、通信状況により遅れることがあります。</p>
+  <p>※ 東京タクシーセンターの公式案内：<a href="https://www.tokyo-tc.or.jp/driver/stand/livecamera/" target="_blank" rel="noopener">タクシー乗り場待機状況</a>。利用時は必ず安全な場所に停車してください。</p>
+  <p>※ このページの noindex 設定は検索エンジンへの登録を抑制するためのもので、アクセス制限ではありません。URLを知っている人だけに限定するには、別途パスワード等の認証が必要です。</p>
+</div>
+<script>
+const REFRESH_MS=60000;let enabled=true;let timer=null;
+const cards=[...document.querySelectorAll('.card')];
+function stamp(){document.getElementById('lastUpdate').textContent='更新操作：'+new Date().toLocaleTimeString('ja-JP',{hour:'2-digit',minute:'2-digit',second:'2-digit'});}
+function refreshFrames(){cards.forEach(card=>{if(card.classList.contains('hidden'))return;const frame=card.querySelector('iframe');try{const u=new URL(frame.src);u.searchParams.set('_refresh',Date.now());frame.src=u.toString();}catch(e){frame.src=frame.src;}});stamp();}
+function start(){clearInterval(timer);if(enabled)timer=setInterval(refreshFrames,REFRESH_MS);document.getElementById('toggleRefresh').textContent='自動更新 '+(enabled?'ON':'OFF');}
+document.getElementById('toggleRefresh').addEventListener('click',()=>{enabled=!enabled;start();});
+document.getElementById('refreshNow').addEventListener('click',refreshFrames);
+document.getElementById('showAll').addEventListener('click',()=>{cards.forEach(c=>{c.classList.remove('hidden');c.querySelector('input[type=checkbox]').checked=true;});});
+cards.forEach(c=>c.querySelector('input[type=checkbox]').addEventListener('change',e=>c.classList.toggle('hidden',!e.target.checked)));
+start();stamp();
+</script>
+</body>
+</html>
